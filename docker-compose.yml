@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mc:
+    image: itzg/minecraft-server
+    environment:
+      EULA: "TRUE"
+      MOD_PLATFORM: "CURSEFORGE"
+      CF_SERVER_MOD: "https://mediafilez.forgecdn.net/files/5339/476/All%20of%20Fabric%207-Server-2.2.2.zip"
+      CF_OVERRIDES_EXCLUSIONS: |
+        mods/iris*.jar
+        mods/sodium*.jar
+      MEMORY: "12G"                     # 12GB of RAM
+      MOTD: "Type \"/help\" for help!"  # Message of the Day
+      DIFFICULTY: "hard"                # peaceful, easy, normal, hard
+      OPS: ""                           # Set this to your Minecraft username to be an operator
+    ports:
+      - "25565:25565"
+    volumes:
+      - ./mc-data:/data
+    restart: unless-stopped
+
+volumes:
+  mc-data: {}
